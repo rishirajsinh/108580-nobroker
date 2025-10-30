@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell or Rent your Property For Free - NoBroker</title>
+        <link rel="shortcut icon" href="nofav.webp" type="image/x-icon">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #fff;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            height: 35px;
+            width: auto;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .pay-rent-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            color: #333;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pay-rent-btn:hover {
+            background: #f8f9fa;
+        }
+
+        .post-property-btn {
+            padding: 10px 20px;
+            background: #00a699;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .post-property-btn:hover {
+            background: #008c82;
+        }
+
+        .nav-link {
+            padding: 8px 16px;
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #00a699;
+        }
+
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .looking-for {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .looking-for a {
+            color: #00a699;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+        }
+
+        /* Left Panel */
+        .left-panel {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 12px;
+        }
+
+        .why-post {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .features-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 25px;
+            color: #666;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+        }
+
+        .testimonial {
+            margin-top: 40px;
+        }
+
+        .testimonial-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-text {
+            color: #666;
+            line-height: 1.6;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-author {
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* Right Panel - Form */
+        .form-panel {
+            background: white;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .input-field {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-field:focus {
+            border-color: #00a699;
+        }
+
+        .phone-input-wrapper {
+            display: flex;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .phone-input-wrapper:focus-within {
+            border-color: #00a699;
+        }
+
+        .country-code {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-right: 1px solid #ddd;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .flag {
+            width: 20px;
+            height: 14px;
+            background: linear-gradient(to bottom, #FF9933 33.33%, white 33.33%, white 66.66%, #138808 66.66%);
+            border-radius: 2px;
+        }
+
+        .phone-input {
+            flex: 1;
+            border: none;
+            padding: 15px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .whatsapp-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            background: #00a699;
+            border-radius: 13px;
+            cursor: pointer;
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            right: 2px;
+            transition: transform 0.3s;
+        }
+
+        .property-type-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .tab.active {
+            color: #00a699;
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #00a699;
+        }
+
+        .tab .badge {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: #ff4458;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .ad-type-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .ad-type-btn {
+            padding: 15px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .ad-type-btn:hover {
+            border-color: #00a699;
+        }
+
+        .ad-type-btn.active {
+            background: #00a699;
+            color: white;
+            border-color: #00a699;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: #ff4458;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #e63946;
+        }
+
+        .help-banner {
+            background: #fef3cd;
+            padding: 15px;
+            text-align: center;
+            margin-top: 40px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #856404;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .left-panel {
+                order: 2;
+            }
+
+            .form-panel {
+                order: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .nav-right > *:not(.menu-btn) {
+                display: none;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .header-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .ad-type-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .left-panel {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 20px 15px;
+            }
+
+            .tabs {
+                flex-wrap: wrap;
+            }
+
+            .tab {
+                flex: 1 1 auto;
+                min-width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <img src="./nologo.svg" alt="NoBroker" class="logo">
+        <div class="nav-right">
+            <button class="pay-rent-btn">
+                <span>🏠</span>
+                Pay Rent
+            </button>
+            <button class="post-property-btn">Post Your Property</button>
+            <a href="#" class="nav-link">Sign up</a>
+            <a href="#" class="nav-link">Log in</a>
+            <button class="menu-btn">☰ Menu</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header-section">
+            <h1 class="page-title">Sell or Rent your Property For Free</h1>
+            <p class="looking-for">Looking for a property? <a href="#">Click Here</a></p>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Left Panel -->
+            <div class="left-panel">
+                <h2 class="why-post">Why Post through us?</h2>
+                <ul class="features-list">
+                    <li>
+                        <svg class="feature-icon" viewBox="0 0 40 40" fill="none">
+                            <rect x="5" y="10" width="30" height="25" stroke="#666" stroke-width="2" fill="#f0f0f0"/>
+                            <path d="M20 10 L5 10 L12.5 2 L27.5 2 L35 10" fill="#FF9933" stroke="#666" stroke-width="2"/>
+                        </svg>
+                        <span>Zero Brokerage</span>
+                    </li>
+                    <li>
+                        <svg class="feature-icon" viewBox="0 0 40 40" fill="none">
+                            <circle cx="20" cy="20" r="15" stroke="#666" stroke-width="2" fill="#f0f0f0"/>
+                            <path d="M20 12 L20 20 L26 20" stroke="#666" stroke-width="2"/>
+                        </svg>
+                        <span>Faster Tenants</span>
+                    </li>
+                    <li>
+                        <svg class="feature-icon" viewBox="0 0 40 40" fill="none">
+                            <circle cx="15" cy="15" r="8" stroke="#666" stroke-width="2" fill="#f0f0f0"/>
+                            <circle cx="25" cy="25" r="8" stroke="#666" stroke-width="2" fill="#f0f0f0"/>
+                        </svg>
+                        <span>10 lac tenants/buyers connections</span>
+                    </li>
+                </ul>
+
+                <div class="testimonial">
+                    <h3 class="testimonial-title">30 Lac+ Home Owners Trust Us</h3>
+                    <p class="testimonial-text">
+                        I posted a property ad online on NoBroker. Its an efficient real estate website because despite my busy schedule they did a great job of contacting me at the right times. To keep me updated they sent mails & messages. They found a great tenant for my rental property as per my demands.
+                    </p>
+                    <p class="testimonial-author">Aldrin | Bangalore</p>
+                </div>
+            </div>
+
+            <!-- Right Panel - Form -->
+            <div class="form-panel">
+                <form>
+                    <div class="form-row">
+                        <input type="text" class="input-field" placeholder="Name">
+                        <input type="email" class="input-field" placeholder="Email">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="phone-input-wrapper">
+                            <div class="country-code">
+                                <div class="flag"></div>
+                                <span>+91 ▼</span>
+                            </div>
+                            <input type="tel" class="phone-input" placeholder="Mobile Number" maxlength="10">
+                        </div>
+                        <select class="input-field">
+                            <option>Select City</option>
+                            <option>Mumbai</option>
+                            <option>Delhi</option>
+                            <option>Bangalore</option>
+                            <option>Pune</option>
+                            <option>Surat</option>
+                        </select>
+                    </div>
+
+                    <div class="whatsapp-toggle">
+                        <span>Get updates on</span>
+                        <span style="color: #25D366;">📱 WhatsApp</span>
+                        <div class="toggle-switch"></div>
+                    </div>
+
+                    <div class="property-type-section">
+                        <h3 class="section-title">Property type</h3>
+                        <div class="tabs">
+                            <button type="button" class="tab active">Residential</button>
+                            <button type="button" class="tab">Commercial</button>
+                            <button type="button" class="tab">
+                                Land/Plot
+                                <span class="badge">New</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="property-type-section">
+                        <h3 class="section-title">Select Property Ad Type</h3>
+                        <div class="ad-type-buttons">
+                            <button type="button" class="ad-type-btn active">Rent</button>
+                            <button type="button" class="ad-type-btn">Resale</button>
+                            <button type="button" class="ad-type-btn">PG/Hostel</button>
+                            <button type="button" class="ad-type-btn">Flatmates</button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Start Posting Your Ad For FREE</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="help-banner">
+            📞 Give a missed call to 869-000-5267 to get help with your property listing
+        </div>
+    </div>
+
+    
+</body>
+</html>

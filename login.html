@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Sign up</title>
+        <link rel="shortcut icon" href="nofav.webp" type="image/x-icon">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .left-panel {
+            flex: 1;
+            padding: 60px 40px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-container {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 30px;
+        }
+
+        .house-icon {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .house-base {
+            width: 80px;
+            height: 60px;
+            background: white;
+            border: 3px solid #333;
+            border-radius: 4px;
+            position: absolute;
+            bottom: 20px;
+            left: 35px;
+        }
+
+        .house-roof {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 40px solid #FF9933;
+            position: absolute;
+            top: 25px;
+            left: 25px;
+        }
+
+        .house-door {
+            width: 20px;
+            height: 30px;
+            background: #FF9933;
+            position: absolute;
+            bottom: 20px;
+            left: 65px;
+        }
+
+        .magnifier {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #333;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 15px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .magnifier::after {
+            content: '';
+            width: 4px;
+            height: 25px;
+            background: #333;
+            position: absolute;
+            bottom: -22px;
+            right: -5px;
+            transform: rotate(-45deg);
+        }
+
+        .cloud {
+            width: 60px;
+            height: 20px;
+            background: #ddd;
+            border-radius: 20px;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+
+        .cloud::before {
+            content: '';
+            width: 30px;
+            height: 20px;
+            background: #ddd;
+            border-radius: 50%;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .features {
+            list-style: none;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .features li {
+            padding: 12px 0;
+            color: #555;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .features li::before {
+            content: '✓';
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 12px;
+            font-size: 18px;
+        }
+
+        .right-panel {
+            flex: 1;
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .phone-input {
+            display: flex;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+
+        .phone-input:focus-within {
+            border-color: #FF4458;
+        }
+
+        .country-code {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-right: 1px solid #ddd;
+            cursor: pointer;
+            min-width: 80px;
+        }
+
+        .flag {
+            width: 24px;
+            height: 16px;
+            margin-right: 8px;
+            background: linear-gradient(to bottom, #FF9933 33.33%, white 33.33%, white 66.66%, #138808 66.66%);
+            border-radius: 2px;
+        }
+
+        .phone-number {
+            flex: 1;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .phone-number::placeholder {
+            color: #999;
+        }
+
+        .continue-btn {
+            width: 100%;
+            padding: 16px;
+            background: #FF4458;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .continue-btn:hover {
+            background: #e63946;
+        }
+
+        .continue-btn:active {
+            transform: scale(0.98);
+        }
+
+        .terms {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .terms a {
+            color: #FF4458;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .terms a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .left-panel {
+                padding: 40px 30px;
+            }
+
+            .icon-container {
+                width: 120px;
+                height: 120px;
+            }
+
+            .right-panel {
+                padding: 40px 30px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            .form-title {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .left-panel, .right-panel {
+                padding: 30px 20px;
+            }
+
+            .features li {
+                font-size: 14px;
+            }
+
+            .continue-btn {
+                padding: 14px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="icon-container">
+                <div class="house-icon">
+                    <div class="cloud"></div>
+                    <div class="house-roof"></div>
+                    <div class="house-base"></div>
+                    <div class="house-door"></div>
+                    <div class="magnifier"></div>
+                </div>
+            </div>
+            <h2>Login/Sign up</h2>
+            <ul class="features">
+                <li>Zero Brokerage.</li>
+                <li>Thousands of new listings daily.</li>
+                <li>100 Cr+ Brokerage saved monthly.</li>
+            </ul>
+        </div>
+
+        <div class="right-panel">
+            <h1 class="form-title">Enter phone to continue</h1>
+            <form>
+                <div class="input-group">
+                    <div class="phone-input">
+                        <div class="country-code">
+                            <div class="flag"></div>
+                            <span>+91 ▼</span>
+                        </div>
+                        <input type="tel" class="phone-number" placeholder="Enter Mobile Number" maxlength="10">
+                    </div>
+                </div>
+                <button type="submit" class="continue-btn">Continue</button>
+            </form>
+            <p class="terms">By continuing, you agree to our <a href="#">Terms & Conditions</a></p>
+        </div>
+    </div>
+</body>
+</html>
